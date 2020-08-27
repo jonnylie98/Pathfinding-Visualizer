@@ -1,18 +1,18 @@
 {
   "files": {
-    "main.css": "/Pathfinding-Visualizer/static/css/main.12a6569d.chunk.css",
-    "main.js": "/Pathfinding-Visualizer/static/js/main.3a17cd4f.chunk.js",
-    "main.js.map": "/Pathfinding-Visualizer/static/js/main.3a17cd4f.chunk.js.map",
+    "main.css": "/Pathfinding-Visualizer/static/css/main.23665472.chunk.css",
+    "main.js": "/Pathfinding-Visualizer/static/js/main.af5b8e9c.chunk.js",
+    "main.js.map": "/Pathfinding-Visualizer/static/js/main.af5b8e9c.chunk.js.map",
     "runtime-main.js": "/Pathfinding-Visualizer/static/js/runtime-main.047d2f99.js",
     "runtime-main.js.map": "/Pathfinding-Visualizer/static/js/runtime-main.047d2f99.js.map",
     "static/css/2.ac7e1d5f.chunk.css": "/Pathfinding-Visualizer/static/css/2.ac7e1d5f.chunk.css",
     "static/js/2.f38b8e07.chunk.js": "/Pathfinding-Visualizer/static/js/2.f38b8e07.chunk.js",
     "static/js/2.f38b8e07.chunk.js.map": "/Pathfinding-Visualizer/static/js/2.f38b8e07.chunk.js.map",
     "index.html": "/Pathfinding-Visualizer/index.html",
-    "precache-manifest.d5ae54461e64180043ac1e49ae248c0c.js": "/Pathfinding-Visualizer/precache-manifest.d5ae54461e64180043ac1e49ae248c0c.js",
+    "precache-manifest.384dd470c7abd0c8c459153aec56b321.js": "/Pathfinding-Visualizer/precache-manifest.384dd470c7abd0c8c459153aec56b321.js",
     "service-worker.js": "/Pathfinding-Visualizer/service-worker.js",
     "static/css/2.ac7e1d5f.chunk.css.map": "/Pathfinding-Visualizer/static/css/2.ac7e1d5f.chunk.css.map",
-    "static/css/main.12a6569d.chunk.css.map": "/Pathfinding-Visualizer/static/css/main.12a6569d.chunk.css.map",
+    "static/css/main.23665472.chunk.css.map": "/Pathfinding-Visualizer/static/css/main.23665472.chunk.css.map",
     "static/js/2.f38b8e07.chunk.js.LICENSE.txt": "/Pathfinding-Visualizer/static/js/2.f38b8e07.chunk.js.LICENSE.txt",
     "static/media/bootstrap.css": "/Pathfinding-Visualizer/static/media/glyphicons-halflings-regular.fa277232.woff",
     "static/media/logo.svg": "/Pathfinding-Visualizer/static/media/logo.5d5d9eef.svg"
@@ -21,7 +21,7 @@
     "static/js/runtime-main.047d2f99.js",
     "static/css/2.ac7e1d5f.chunk.css",
     "static/js/2.f38b8e07.chunk.js",
-    "static/css/main.12a6569d.chunk.css",
-    "static/js/main.3a17cd4f.chunk.js"
+    "static/css/main.23665472.chunk.css",
+    "static/js/main.af5b8e9c.chunk.js"
   ]
 }

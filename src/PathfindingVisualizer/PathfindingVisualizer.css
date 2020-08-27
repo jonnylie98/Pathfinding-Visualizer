@@ -1,5 +1,16 @@
+.nav-bar {
+  height: auto;
+}
+
+.nav-bar button {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  margin-left:5px;
+  margin-right: 5px;
+}
+
 .grid-container {
-  margin: 10% auto;
+  margin: 5% auto;
   font-size: 0px;
 }
 

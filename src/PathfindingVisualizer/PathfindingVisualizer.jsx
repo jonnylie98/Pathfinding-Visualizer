@@ -265,11 +265,13 @@ class PathfindingVisualizer extends Component {
 
     return (
       <>
-        <button onClick={() => { this.clearGrid(); this.visualizeDijkstra(); this.isRunning() }}>
-          Visualize Dijkstra's Algorithm
+        <div className="nav-bar">
+          <button onClick={() => { this.clearGrid(); this.visualizeDijkstra(); this.isRunning() }}>
+            Visualize Dijkstra's Algorithm
         </button>
-        <button onClick={() => this.clearWall()}>Clear Wall</button>
-        <button onClick={() => this.clearGrid()}>Clear Grid</button>
+          <button onClick={() => this.clearWall()}>Clear Wall</button>
+          <button onClick={() => this.clearGrid()}>Clear Grid</button>
+        </div>
         <div
           className="grid-container"
           onMouseLeave={() => this.handleMouseLeave()}

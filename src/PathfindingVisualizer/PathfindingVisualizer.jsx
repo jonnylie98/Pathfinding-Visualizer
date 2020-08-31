@@ -239,25 +239,31 @@ class PathfindingVisualizer extends Component {
 
   animateShortestPath(nodesInShortestPathOrder) {
     for (let i = 0; i < nodesInShortestPathOrder.length; i++) {
-      setTimeout(() => {
-        const node = nodesInShortestPathOrder[i];
-        const nodeClassName = document.getElementById(
-          `node-${node.row}-${node.col}`,
-        ).className;
-        if (
-          nodeClassName !== 'node node-start' &&
-          nodeClassName !== 'node node-finish'
-        ) {
-          document.getElementById(`node-${node.row}-${node.col}`).className =
-            "node node-shortest-path";
-        }
-      }, 50 * i);
+      if (nodesInShortestPathOrder[i] === 'last') {
+        setTimeout(() => {
+          this.isRunning();
+        }, i * 50);
+      } else {
+        setTimeout(() => {
+          const node = nodesInShortestPathOrder[i];
+          const nodeClassName = document.getElementById(
+            `node-${node.row}-${node.col}`,
+          ).className;
+          if (
+            nodeClassName !== 'node node-start' &&
+            nodeClassName !== 'node node-finish'
+          ) {
+            document.getElementById(`node-${node.row}-${node.col}`).className =
+              "node node-shortest-path";
+          }
+        }, 50 * i);
+      }
     }
-    this.isRunning();
   }
 
   visualizeAlgorithm(algorithm) {
     if (!this.state.isRunning) {
+      this.isRunning()
       const { grid } = this.state;
       let visitedNodesInOrder;
       const startNode =
@@ -278,6 +284,7 @@ class PathfindingVisualizer extends Component {
           break;
       }
       const nodesInShortestPathOrder = getNodesInShortestPathOrder(finishNode);
+      nodesInShortestPathOrder.push('last');
       this.animateAlgorithm(visitedNodesInOrder, nodesInShortestPathOrder);
     }
   }
@@ -290,13 +297,13 @@ class PathfindingVisualizer extends Component {
     return (
       <>
         <div className="nav-bar">
-          <button onClick={() => { this.clearGrid(); this.visualizeAlgorithm('Dijkstra'); this.isRunning() }}>
-            Visualize Dijkstra's Algorithm
+          <button onClick={() => { this.clearGrid(); this.visualizeAlgorithm('Dijkstra') }}>
+            Dijkstra
         </button>
-          <button onClick={() => { this.clearGrid(); this.visualizeAlgorithm('Breadth-first Search'); this.isRunning() }}>
+          <button onClick={() => { this.clearGrid(); this.visualizeAlgorithm('Breadth-first Search') }}>
             Breadth-first Search
         </button>
-          <button onClick={() => { this.clearGrid(); this.visualizeAlgorithm('Depth-first Search'); this.isRunning() }}>
+          <button onClick={() => { this.clearGrid(); this.visualizeAlgorithm('Depth-first Search') }}>
             Depth-first Search
         </button>
           <button onClick={() => this.clearWall()}>Clear Wall</button>

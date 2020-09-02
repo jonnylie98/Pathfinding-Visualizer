@@ -1,10 +1,21 @@
-.nav-bar {
+.action {
   height: auto;
+}
+
+.title {
+  font-size: large;
+  border: none;
+  background-color: transparent;
+  font-weight: bold;
+  display: inline-block;
+  color: white;
+  line-height: inherit;
+  white-space: nowrap;
 }
 
 /* test */
 
-.nav-bar button {
+.action button {
   margin-top: 20px;
   margin-bottom: 20px;
   margin-left:5px;

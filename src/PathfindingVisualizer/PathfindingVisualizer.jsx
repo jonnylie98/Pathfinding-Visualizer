@@ -3,6 +3,7 @@ import Node from "./Node/Node";
 import { dijkstra } from "../algorithms/dijkstra";
 import { bfs } from "../algorithms/bfs";
 import { dfs } from "../algorithms/dfs";
+import Dialog from "../dialog/Dialog";
 
 import "./PathfindingVisualizer.css";
 
@@ -17,10 +18,11 @@ class PathfindingVisualizer extends Component {
     currRow: 0,
     currCol: 0,
     START_NODE_ROW: 10,
-    START_NODE_COL: 15,
+    START_NODE_COL: 10,
     FINISH_NODE_ROW: 10,
-    FINISH_NODE_COL: 35,
+    FINISH_NODE_COL: 30,
     previousNode: false,
+    modalIsOpen: false
   };
 
   componentDidMount() {
@@ -36,7 +38,7 @@ class PathfindingVisualizer extends Component {
     const grid = [];
     for (let row = 0; row < 20; row++) {
       const currentRow = [];
-      for (let col = 0; col < 50; col++) {
+      for (let col = 0; col < 40; col++) {
         currentRow.push(this.createNode(col, row));
       }
       grid.push(currentRow);
@@ -291,70 +293,78 @@ class PathfindingVisualizer extends Component {
 
   render() {
     const { grid, mouseIsPressed } = this.state;
-    console.log(grid);
+    // console.log(grid);
+    console.log(this.state.modalIsOpen);
     // test
 
     return (
       <>
-        <div className="nav-bar">
-          <button onClick={() => { this.clearGrid(); this.visualizeAlgorithm('Dijkstra') }}>
-            Dijkstra
+        <div>
+          <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+            <button className="title" onClick={(e) => this.setState({ modalIsOpen: true })}>Pathfinding Visualizer</button>
+          </nav>
+          <div className="action">
+            <Dialog modalIsOpen={this.state.modalIsOpen} onClose={() => this.setState({ modalIsOpen: false })}> loren ipsum </Dialog>
+            <button className="btn btn-primary" onClick={() => { this.clearGrid(); this.visualizeAlgorithm('Dijkstra') }}>
+              Dijkstra
         </button>
-          <button onClick={() => { this.clearGrid(); this.visualizeAlgorithm('Breadth-first Search') }}>
-            Breadth-first Search
+            <button className="btn btn-primary" onClick={() => { this.clearGrid(); this.visualizeAlgorithm('Breadth-first Search') }}>
+              Breadth-first Search
         </button>
-          <button onClick={() => { this.clearGrid(); this.visualizeAlgorithm('Depth-first Search') }}>
-            Depth-first Search
+            <button className="btn btn-primary" onClick={() => { this.clearGrid(); this.visualizeAlgorithm('Depth-first Search') }}>
+              Depth-first Search
         </button>
-          <button onClick={() => this.clearWall()}>Clear Wall</button>
-          <button onClick={() => this.clearGrid()}>Clear Grid</button>
-        </div>
-        <div
-          className="grid-container"
-          onMouseLeave={() => this.handleMouseLeave()}
-        >
-          <div className="grid">
-            {grid.map((row, rowIdx) => {
-              return (
-                <div key={rowIdx}>
-                  {row.map((node, nodeIdx) => {
-                    const {
-                      row,
-                      col,
-                      isStart,
-                      isFinish,
-                      isVisisted,
-                      isWall,
-                    } = node;
-                    return (
-                      <Node
-                        key={nodeIdx}
-                        col={col}
-                        row={row}
-                        isStart={isStart}
-                        isFinish={isFinish}
-                        isVisisted={isVisisted}
-                        isWall={isWall}
-                        mouseIsPressed={mouseIsPressed}
-                        onMouseDown={(row, col) =>
-                          this.handleMouseDown(row, col)
-                        }
-                        onMouseEnter={(row, col) =>
-                          this.handleMouseEnter(row, col)
-                        }
-                        onMouseUp={(row, col) => this.handleMouseUp(row, col)}
-                      ></Node>
-                    );
-                  })}
-                </div>
-              );
-            })}
+            <button className="btn btn-danger" onClick={() => this.clearWall()}>Clear Wall</button>
+            <button className="btn btn-danger" onClick={() => this.clearGrid()}>Clear Grid</button>
+          </div>
+          <div
+            className="grid-container"
+            onMouseLeave={() => this.handleMouseLeave()}
+          >
+            <div className="grid">
+              {grid.map((row, rowIdx) => {
+                return (
+                  <div key={rowIdx}>
+                    {row.map((node, nodeIdx) => {
+                      const {
+                        row,
+                        col,
+                        isStart,
+                        isFinish,
+                        isVisisted,
+                        isWall,
+                      } = node;
+                      return (
+                        <Node
+                          key={nodeIdx}
+                          col={col}
+                          row={row}
+                          isStart={isStart}
+                          isFinish={isFinish}
+                          isVisisted={isVisisted}
+                          isWall={isWall}
+                          mouseIsPressed={mouseIsPressed}
+                          onMouseDown={(row, col) =>
+                            this.handleMouseDown(row, col)
+                          }
+                          onMouseEnter={(row, col) =>
+                            this.handleMouseEnter(row, col)
+                          }
+                          onMouseUp={(row, col) => this.handleMouseUp(row, col)}
+                        ></Node>
+                      );
+                    })}
+                  </div>
+                );
+              })}
+            </div>
           </div>
         </div>
       </>
     );
   }
 }
+
 
 const getNewGridWithWallToggled = (grid, row, col) => {
   const newGrid = grid.slice();

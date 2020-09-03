@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import "./Dialog.css";
 import walls from "../assets/walls.gif"
+import algorithms from "../assets/algorithms.PNG"
+import nodes from "../assets/nodes.gif"
 
 let dialogStyles = {
     width: '500px',
@@ -51,7 +53,7 @@ class Dialog extends Component {
     }
 
     render() {
-        console.log(this.state.number)
+        // console.log(this.state.number)
         let dialog = (
             <div style={dialogStyles}>
                 <button style={dialogCloseButtonStyles} onClick={this.props.onClose}>x</button>
@@ -96,6 +98,7 @@ class Dialog extends Component {
                 <br />
                 <p className="subtitle">Click and drag the start and end node to move them</p>
                 <br />
+                <img style={center} src={nodes} alt="nodes" />
                 {/* <p>Walls are impenetrable, meaning that a path cannot cross through them.</p>
                 <img style={center} src={walls} alt="walls" /> */}
                 <button className="btn btn-primary" onClick={() => this.setState({ number: 5 })}>Next</button>
@@ -107,10 +110,10 @@ class Dialog extends Component {
                 <button style={dialogCloseButtonStyles} onClick={() => this.closeModal()}>x</button>
                 <h1>Visualizing</h1>
                 <br />
-                <p className="subtitle">Click the buttons to visualize algorithm</p>
+                <p className="subtitle">Click one of the button to visualize algorithm</p>
                 <br />
                 <p>You can clear the current path and clear walls from the navbar. If you want to access this tutorial again, click on "Pathfinding Visualizer" in the top left corner of your screen.</p>
-                {/* <img style={center} src={walls} alt="walls" /> */}
+                <img style={center} src={algorithms} alt="algorithms" />
                 <button className="btn btn-primary" onClick={() => this.setState({ number: 6 })}>Next</button>
             </div >
         )
@@ -134,6 +137,7 @@ class Dialog extends Component {
         if (!this.props.modalIsOpen) {
             dialog = null;
         }
+
         if (this.props.modalIsOpen && this.state.number === 1) {
             return (
                 <div>

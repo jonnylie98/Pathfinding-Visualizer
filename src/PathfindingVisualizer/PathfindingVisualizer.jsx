@@ -22,8 +22,9 @@ class PathfindingVisualizer extends Component {
     FINISH_NODE_ROW: 10,
     FINISH_NODE_COL: 30,
     previousNode: false,
-    modalIsOpen: true
+    modalIsOpen: true,
   };
+
 
   componentDidMount() {
     const grid = this.getInitialGrid();
@@ -294,7 +295,7 @@ class PathfindingVisualizer extends Component {
   render() {
     const { grid, mouseIsPressed } = this.state;
     // console.log(grid);
-    console.log(this.state.modalIsOpen);
+    console.log(this.state.wid)
     // test
 
     return (

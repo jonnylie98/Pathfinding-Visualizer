@@ -5,6 +5,13 @@
   display: inline-table;
 }
 
+@media (max-width: 776px) {
+  .node {
+    width: 8px;
+    height: 8px;
+  }
+}
+
 .node-finish {
   background-color: green;
 }

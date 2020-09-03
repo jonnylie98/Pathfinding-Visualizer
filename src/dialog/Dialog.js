@@ -40,6 +40,12 @@ let center = {
     width: '300px'
 }
 
+let center2 = {
+    display: 'block',
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    width: '450px'
+}
 
 
 class Dialog extends Component {
@@ -108,12 +114,13 @@ class Dialog extends Component {
         let dialog5 = (
             <div style={dialogStyles}>
                 <button style={dialogCloseButtonStyles} onClick={() => this.closeModal()}>x</button>
-                <h1>Visualizing</h1>
+                <h1>Visualizing and more</h1>
                 <br />
-                <p className="subtitle">Click one of the button to visualize algorithm</p>
+                <p className="subtitle">Click the buttons to visualize algorithms and do other thing</p>
                 <br />
                 <p>You can clear the current path and clear walls from the navbar. If you want to access this tutorial again, click on "Pathfinding Visualizer" in the top left corner of your screen.</p>
-                <img style={center} src={algorithms} alt="algorithms" />
+                <img style={center2} src={algorithms} alt="algorithms" />
+                <br />
                 <button className="btn btn-primary" onClick={() => this.setState({ number: 6 })}>Next</button>
             </div >
         )

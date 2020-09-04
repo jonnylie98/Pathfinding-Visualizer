@@ -66,7 +66,7 @@ class PathfindingVisualizer extends Component {
   }
 
   clearGrid() {
-    if (!this.state.isRunning) {
+    if (!this.state.isRunning && !this.state.modalIsOpen) {
       const newGrid = this.state.grid.slice()
       for (const row of newGrid) {
         for (const node of row) {
@@ -116,7 +116,7 @@ class PathfindingVisualizer extends Component {
   };
 
   handleMouseDown(row, col) {
-    if (!this.state.isRunning) {
+    if (!this.state.isRunning && !this.state.modalIsOpen) {
       if (
         document.getElementById(`node-${row}-${col}`).className ===
         "node node-start"
@@ -151,7 +151,7 @@ class PathfindingVisualizer extends Component {
   }
 
   handleMouseEnter(row, col) {
-    if (!this.state.isRunning) {
+    if (!this.state.isRunning && !this.state.modalIsOpen) {
       if (this.state.mouseIsPressed) {
         const nodeClassName = document.getElementById(`node-${row}-${col}`)
           .className;
@@ -186,7 +186,7 @@ class PathfindingVisualizer extends Component {
   }
 
   handleMouseUp(row, col) {
-    if (!this.state.isRunning) {
+    if (!this.state.isRunning && !this.state.modalIsOpen) {
       this.setState({ mouseIsPressed: false });
       if (this.state.isStartNode) {
         const isStartNode = !this.state.isStartNode;
@@ -265,7 +265,7 @@ class PathfindingVisualizer extends Component {
   }
 
   visualizeAlgorithm(algorithm) {
-    if (!this.state.isRunning) {
+    if (!this.state.isRunning && !this.state.modalIsOpen) {
       this.isRunning()
       const { grid } = this.state;
       let visitedNodesInOrder;

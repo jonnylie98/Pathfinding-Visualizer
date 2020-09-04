@@ -44,7 +44,7 @@ let center2 = {
     display: 'block',
     marginLeft: 'auto',
     marginRight: 'auto',
-    width: '450px'
+    width: '325px'
 }
 
 
@@ -62,7 +62,7 @@ class Dialog extends Component {
         // console.log(this.state.number)
         let dialog = (
             <div style={dialogStyles}>
-                <button style={dialogCloseButtonStyles} onClick={this.props.onClose}>x</button>
+                <button style={dialogCloseButtonStyles} onClick={this.props.onClose}>&times;</button>
                 <h1>Welcome to Pathfinding Visualizer!</h1>
                 <br />
                 <p className="subtitle">This tutorial will guide you through all of the features of this application.</p>
@@ -74,10 +74,10 @@ class Dialog extends Component {
 
         let dialog2 = (
             <div style={dialogStyles}>
-                <button style={dialogCloseButtonStyles} onClick={() => this.closeModal()}>x</button>
+                <button style={dialogCloseButtonStyles} onClick={() => this.closeModal()}>&times;</button>
                 <h1>Do you know what is a pathfinding algorithm?</h1>
                 <br />
-                <p className="subtitle">A pathfinding algorithm is used to find the shortest path between two points (start node and end node). This application visualize various pathfinding algorithms in action.</p>
+                <p className="subtitle">A pathfinding algorithm is used to find the shortest path between two points (start point and end point). This application visualize various pathfinding algorithms in action.</p>
                 <br />
                 <p>All of the algorithms on this application are adapted for a 2D grid, where 90 degree turns have a "cost" of 1 and movements from a node to another have a "cost" of 1.</p>
                 <button className="btn btn-primary" onClick={() => this.setState({ number: 3 })}>Next</button>
@@ -86,7 +86,7 @@ class Dialog extends Component {
 
         let dialog3 = (
             <div style={dialogStyles}>
-                <button style={dialogCloseButtonStyles} onClick={() => this.closeModal()}>x</button>
+                <button style={dialogCloseButtonStyles} onClick={() => this.closeModal()}>&times;</button>
                 <h1>Adding walls</h1>
                 <br />
                 <p className="subtitle">Click on the grid to add a wall or click and drag to add walls</p>
@@ -99,7 +99,7 @@ class Dialog extends Component {
 
         let dialog4 = (
             <div style={dialogStyles}>
-                <button style={dialogCloseButtonStyles} onClick={() => this.closeModal()}>x</button>
+                <button style={dialogCloseButtonStyles} onClick={() => this.closeModal()}>&times;</button>
                 <h1>Dragging nodes</h1>
                 <br />
                 <p className="subtitle">Click and drag the start and end node to move them</p>
@@ -113,7 +113,7 @@ class Dialog extends Component {
 
         let dialog5 = (
             <div style={dialogStyles}>
-                <button style={dialogCloseButtonStyles} onClick={() => this.closeModal()}>x</button>
+                <button style={dialogCloseButtonStyles} onClick={() => this.closeModal()}>&times;</button>
                 <h1>Visualizing and more</h1>
                 <br />
                 <p className="subtitle">Click the buttons to visualize algorithms and do other thing</p>
@@ -127,7 +127,7 @@ class Dialog extends Component {
 
         let dialog6 = (
             <div style={dialogStyles}>
-                <button style={dialogCloseButtonStyles} onClick={() => this.closeModal()}>x</button>
+                <button style={dialogCloseButtonStyles} onClick={() => this.closeModal()}>&times;</button>
                 <h1>Get to know the algorithms</h1>
                 <br />
                 <p className="subtitle">Not all algorithms are created equal.</p>

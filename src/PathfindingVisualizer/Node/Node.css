@@ -16,6 +16,14 @@
   }
 }
 
+
+@media (min-width: 776px) {
+  .node-wall {
+    background-color: rgb(12, 53, 71);
+    outline: rgb(12, 53, 71);
+  }
+}
+
 .node-finish {
   background-color: green;
 }

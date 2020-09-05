@@ -3,6 +3,7 @@ import Node from "./Node/Node";
 import { dijkstra } from "../algorithms/dijkstra";
 import { bfs } from "../algorithms/bfs";
 import { dfs } from "../algorithms/dfs";
+import { astar } from "../algorithms/astar"
 import Dialog from "../dialog/Dialog";
 
 import "./PathfindingVisualizer.css";
@@ -47,7 +48,7 @@ class PathfindingVisualizer extends Component {
     return grid;
   };
 
-  clearWall() {
+  clearWalls() {
     const newGrid = this.state.grid.slice()
     for (const row of newGrid) {
       for (const node of row) {
@@ -65,7 +66,7 @@ class PathfindingVisualizer extends Component {
     }
   }
 
-  clearGrid() {
+  clearPaths() {
     if (!this.state.isRunning && !this.state.modalIsOpen) {
       const newGrid = this.state.grid.slice()
       for (const row of newGrid) {
@@ -109,6 +110,7 @@ class PathfindingVisualizer extends Component {
       isFinish:
         row === this.state.FINISH_NODE_ROW && col === this.state.FINISH_NODE_COL,
       distance: Infinity,
+      distanceToFinishNode: Math.abs(this.state.FINISH_NODE_ROW - row) + Math.abs(this.state.FINISH_NODE_COL - col),
       isVisisted: false,
       isWallNode: false,
       previousNode: null,
@@ -116,6 +118,7 @@ class PathfindingVisualizer extends Component {
   };
 
   handleMouseDown(row, col) {
+    this.clearPaths();
     if (!this.state.isRunning && !this.state.modalIsOpen) {
       if (
         document.getElementById(`node-${row}-${col}`).className ===
@@ -283,6 +286,9 @@ class PathfindingVisualizer extends Component {
         case 'Depth-first Search':
           visitedNodesInOrder = dfs(grid, startNode, finishNode);
           break;
+        case 'A*':
+          visitedNodesInOrder = astar(grid, startNode, finishNode);
+          break;
         default:
           break;
       }
@@ -295,8 +301,6 @@ class PathfindingVisualizer extends Component {
   render() {
     const { grid, mouseIsPressed } = this.state;
     // console.log(grid);
-    console.log(this.state.wid)
-    // test
 
     return (
       <>
@@ -306,17 +310,20 @@ class PathfindingVisualizer extends Component {
           </nav>
           <div className="action">
             <Dialog modalIsOpen={this.state.modalIsOpen} onClose={() => this.setState({ modalIsOpen: false })}> loren ipsum </Dialog>
-            <button className="btn btn-primary" onClick={() => { this.clearGrid(); this.visualizeAlgorithm('Dijkstra') }}>
+            <button className="btn btn-primary" onClick={() => { this.clearPaths(); this.visualizeAlgorithm('Dijkstra') }}>
               Dijkstra
         </button>
-            <button className="btn btn-primary" onClick={() => { this.clearGrid(); this.visualizeAlgorithm('Breadth-first Search') }}>
+            <button className="btn btn-primary" onClick={() => { this.clearPaths(); this.visualizeAlgorithm('Breadth-first Search') }}>
               Breadth-first Search
         </button>
-            <button className="btn btn-primary" onClick={() => { this.clearGrid(); this.visualizeAlgorithm('Depth-first Search') }}>
+            <button className="btn btn-primary" onClick={() => { this.clearPaths(); this.visualizeAlgorithm('Depth-first Search') }}>
               Depth-first Search
         </button>
-            <button className="btn btn-danger" onClick={() => this.clearWall()}>Clear Wall</button>
-            <button className="btn btn-danger" onClick={() => this.clearGrid()}>Clear Grid</button>
+            <button className="btn btn-primary" onClick={() => { this.clearPaths(); this.visualizeAlgorithm('A*') }}>
+              A*
+        </button>
+            <button className="btn btn-danger" onClick={() => this.clearWalls()}>Clear Walls</button>
+            <button className="btn btn-danger" onClick={() => this.clearPaths()}>Clear Paths</button>
           </div>
           <div
             className="grid-container"

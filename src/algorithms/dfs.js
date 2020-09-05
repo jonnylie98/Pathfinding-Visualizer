@@ -9,16 +9,14 @@ export function dfs(grid, startNode, finishNode) {
         const currentNode = nextNodesStack.pop();
         if (currentNode === finishNode) return visitedNodesInOrder;
 
-        if (
-            !currentNode.isWall &&
-            (currentNode.isStart || !currentNode.isVisited)
+        if (!currentNode.isWall && (currentNode.isStart || !currentNode.isVisited)
         ) {
             currentNode.isVisited = true;
             visitedNodesInOrder.push(currentNode);
             const { col, row } = currentNode;
             let nextNode;
-            if (row > 0) {
-                nextNode = grid[row - 1][col];
+            if (col > 0) {
+                nextNode = grid[row][col - 1];
                 if (!nextNode.isVisited) {
                     nextNode.previousNode = currentNode;
                     nextNodesStack.push(nextNode);
@@ -31,13 +29,6 @@ export function dfs(grid, startNode, finishNode) {
                     nextNodesStack.push(nextNode);
                 }
             }
-            if (col > 0) {
-                nextNode = grid[row][col - 1];
-                if (!nextNode.isVisited) {
-                    nextNode.previousNode = currentNode;
-                    nextNodesStack.push(nextNode);
-                }
-            }
             if (col < grid[0].length - 1) {
                 nextNode = grid[row][col + 1];
                 if (!nextNode.isVisited) {
@@ -45,7 +36,15 @@ export function dfs(grid, startNode, finishNode) {
                     nextNodesStack.push(nextNode);
                 }
             }
+
+            if (row > 0) {
+                nextNode = grid[row - 1][col];
+                if (!nextNode.isVisited) {
+                    nextNode.previousNode = currentNode;
+                    nextNodesStack.push(nextNode);
+                }
+            }
         }
     }
-    // return visitedNodesInOrder;
+    return visitedNodesInOrder;
 }

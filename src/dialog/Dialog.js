@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import "./Dialog.css";
 import walls from "../assets/walls.gif"
-import algorithms from "../assets/algorithms.PNG"
+import algorithms from "../assets/algorithms.png"
 import nodes from "../assets/nodes.gif"
 
 let dialogStyles = {

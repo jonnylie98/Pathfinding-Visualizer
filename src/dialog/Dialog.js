@@ -135,6 +135,7 @@ class Dialog extends Component {
                 <p><strong>Dijkstra's Algorithm</strong>: the father of pathfinding algorithms; guarantees the shortest path</p>
                 <p><strong>Breath-first Search</strong>: a great algorithm; guarantees the shortest path</p>
                 <p><strong>Depth-first Search</strong>: a very bad algorithm for pathfinding; does not guarantee the shortest path</p>
+                <p><strong>A* Search</strong>: arguably the best pathfinding algorithm; uses heuristics to guarantee the shortest path much faster than Dijkstra's Algorithm</p>
                 {/* <img style={center} src={walls} alt="walls" /> */}
                 <button className="btn btn-primary" onClick={() => this.closeModal()}>Finish</button>
             </div >

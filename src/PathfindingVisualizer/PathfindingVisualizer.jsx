@@ -311,7 +311,7 @@ class PathfindingVisualizer extends Component {
           <div className="action">
             <Dialog modalIsOpen={this.state.modalIsOpen} onClose={() => this.setState({ modalIsOpen: false })}> loren ipsum </Dialog>
             <button className="btn btn-primary" onClick={() => { this.clearPaths(); this.visualizeAlgorithm('Dijkstra') }}>
-              Dijkstra
+              Dijkstra's Algorithm
         </button>
             <button className="btn btn-primary" onClick={() => { this.clearPaths(); this.visualizeAlgorithm('Breadth-first Search') }}>
               Breadth-first Search
@@ -320,7 +320,7 @@ class PathfindingVisualizer extends Component {
               Depth-first Search
         </button>
             <button className="btn btn-primary" onClick={() => { this.clearPaths(); this.visualizeAlgorithm('A*') }}>
-              A*
+              A* Search
         </button>
             <button className="btn btn-danger" onClick={() => this.clearWalls()}>Clear Walls</button>
             <button className="btn btn-danger" onClick={() => this.clearPaths()}>Clear Paths</button>

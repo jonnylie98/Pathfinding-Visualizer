@@ -49,18 +49,20 @@ class PathfindingVisualizer extends Component {
   };
 
   clearWalls() {
-    const newGrid = this.state.grid.slice()
-    for (const row of newGrid) {
-      for (const node of row) {
-        let nodeClassName = document.getElementById(
-          `node-${node.row}-${node.col}`,
-        ).className;
-        if (
-          nodeClassName === 'node node-wall'
-        ) {
-          document.getElementById(`node-${node.row}-${node.col}`).className =
-            'node';
-          node.isWall = false
+    if (!this.state.isRunning && !this.state.modalIsOpen) {
+      const newGrid = this.state.grid.slice()
+      for (const row of newGrid) {
+        for (const node of row) {
+          let nodeClassName = document.getElementById(
+            `node-${node.row}-${node.col}`,
+          ).className;
+          if (
+            nodeClassName === 'node node-wall'
+          ) {
+            document.getElementById(`node-${node.row}-${node.col}`).className =
+              'node';
+            node.isWall = false
+          }
         }
       }
     }

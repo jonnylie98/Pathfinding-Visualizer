@@ -25,11 +25,15 @@
 }
 
 .node-finish {
-  background-color: green;
+  background-color: white;
+  background-image: url(../../assets/finish-line.png);
+  background-size: cover;
 }
 
 .node-start {
-  background-color: blue;
+  background-color: white;
+  background-image: url(../../assets/running-man.png);
+  background-size: cover;
 }
 
 .node-visited {

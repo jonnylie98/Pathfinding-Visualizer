@@ -4,6 +4,13 @@ Web application for visualizing Pathfinding algorithms (Dijkstra, A* Search, Dep
 
 A pathfinding algorithm is used to find the shortest path between two points (start point and end point). This application visualize various pathfinding algorithms in action.
 
+## Features
+
+- Adding walls 
+- Dragging start and end node
+- Visualize algorithm
+- Clear paths and walls
+
 ## Get to know the algorithms
 
 Not all algorithms are created equal.

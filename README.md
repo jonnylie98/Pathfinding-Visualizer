@@ -4,7 +4,7 @@ Web application for visualizing Pathfinding algorithms (Dijkstra, A* Search, Dep
 
 ## Built With
 
-- React.js & Bootstrap
+- React.js, CSS & Bootstrap
 
 ## Visit Project
 

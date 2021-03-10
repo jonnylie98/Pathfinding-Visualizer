@@ -5,12 +5,34 @@
   display: inline-table;
 }
 
+@media (max-width: 776px) {
+  .node {
+    width: 8px;
+    height: 8px;
+  }
+
+  .node-wall {
+    background-color: rgb(12, 53, 71);
+  }
+}
+
+@media (min-width: 776px) {
+  .node-wall {
+    background-color: rgb(12, 53, 71);
+    outline: rgb(12, 53, 71);
+  }
+}
+
 .node-finish {
-  background-color: green;
+  background-color: white;
+  background-image: url(../../assets/finish-line.png);
+  background-size: cover;
 }
 
 .node-start {
-  background-color: blue;
+  background-color: white;
+  background-image: url(../../assets/running-man.png);
+  background-size: cover;
 }
 
 .node-visited {
@@ -46,9 +68,45 @@
   }
 }
 
-.node-wall {
-  background-color: rgb(12, 53, 71);
-  outline: rgb(12, 53, 71);
+.node-animated-wall {
+  animation-name: wallAnimation;
+  animation-duration: 0.25s;
+  animation-timing-function: ease-out;
+  animation-delay: 0;
+  animation-direction: alternate;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+  animation-play-state: running;
+}
+
+@keyframes wallAnimation {
+  0% {
+    transform: scale(0.4);
+    background-color: rgb(12, 53, 71);
+    outline: rgb(12, 53, 71);
+    border-radius: 30%;
+  }
+
+  50% {
+    transform: scale(0.6);
+    background-color: rgb(12, 53, 71);
+    outline: rgb(12, 53, 71);
+    border-radius: 20%;
+  }
+
+  75% {
+    transform: scale(0.8);
+    background-color: rgb(12, 53, 71);
+    outline: rgb(12, 53, 71);
+    border-radius: 10%;
+  }
+
+  100% {
+    transform: scale(1);
+    background-color: rgb(12, 53, 71);
+    outline: rgb(12, 53, 71);
+    /* border: 1px solid rgb(2, 36, 51); */
+  }
 }
 
 .node-shortest-path {

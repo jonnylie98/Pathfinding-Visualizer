@@ -1,0 +1,23 @@
+.subtitle {
+    font-size: 18px;
+}
+
+.dialog {
+    font-family: 'Poppins', sans-serif;
+}
+
+#size-1 {
+    width: 300px;
+}
+
+#size-2 {
+    width: 325px;
+}
+
+#size-3 {
+    width: 205px;
+}
+
+#size-4 {
+    width: 150px;
+}

@@ -29,7 +29,6 @@ Not all algorithms are created equal.
 https://jonnylie.github.io/Pathfinding-Visualizer/
 
 
-
 # Getting Started/Installation
 
 ## 1. Clone the repository or download the zip

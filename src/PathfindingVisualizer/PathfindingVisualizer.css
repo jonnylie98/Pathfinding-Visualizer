@@ -21,6 +21,40 @@
   margin-right: 5px;
   font-size: 12px;
   }
+
+  .info {
+    width: 240px;
+    height: 40px;
+    margin: 1% auto;
+    margin-top: 25px;
+  }
+
+  .block {
+    width: 8px;
+    height: 8px;
+  }
+
+  .explanation {
+    font-size: small;
+  }
+}
+
+@media (min-width: 776px) {
+  .info {
+    width: 600px;
+    height: 40px;
+    margin: 1% auto;
+    margin-top: 25px;
+  }
+
+  .block {
+    width: 25px;
+    height: 25px;
+  }
+
+  .explanation {
+    font-size: medium;
+  }
 }
 
 
@@ -32,10 +66,46 @@
 }
 
 .grid-container {
-  margin: 5% auto;
+  margin: 1% auto;
   font-size: 0px;
 }
 
 .grid {
   white-space: pre;
+}
+
+.block {
+  outline: 1px solid rgb(175, 216, 248);
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 20px;
+}
+
+.explanation {
+  margin-left: 5px;
+  vertical-align: middle;
+}
+
+#yellow {
+  background-color: rgb(255, 254, 106);
+}
+
+#blue {
+  background-color: rgba(0, 190, 218, 0.75);
+}
+
+#start-node {
+  background-image: running;
+}
+
+#finish-node {
+  background-color: white;
+  background-image: url(../assets/finish-line.png);
+  background-size: cover;
+}
+
+#start-node {
+  background-color: white;
+  background-image: url(../assets/running-man.png);
+  background-size: cover;
 }

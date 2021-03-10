@@ -3,7 +3,8 @@ import Node from "./Node/Node";
 import { dijkstra } from "../algorithms/dijkstra";
 import { bfs } from "../algorithms/bfs";
 import { dfs } from "../algorithms/dfs";
-import { astar } from "../algorithms/astar"
+import { astar } from "../algorithms/astar";
+import { randomMaze } from "../maze-algorithms/randomMaze";
 import Dialog from "../dialog/Dialog";
 
 import "./PathfindingVisualizer.css";
@@ -22,10 +23,11 @@ class PathfindingVisualizer extends Component {
     START_NODE_COL: 10,
     FINISH_NODE_ROW: 10,
     FINISH_NODE_COL: 30,
+    startNode_Pos: [],
+    finishNode_Pos: [],
     previousNode: false,
     modalIsOpen: true,
   };
-
 
   componentDidMount() {
     const grid = this.getInitialGrid();
@@ -48,20 +50,37 @@ class PathfindingVisualizer extends Component {
     return grid;
   };
 
+  createNode = (col, row) => {
+    return {
+      col,
+      row,
+      isStart:
+        row === this.state.START_NODE_ROW && col === this.state.START_NODE_COL,
+      isFinish:
+        row === this.state.FINISH_NODE_ROW &&
+        col === this.state.FINISH_NODE_COL,
+      distance: Infinity,
+      distanceToFinishNode:
+        Math.abs(this.state.FINISH_NODE_ROW - row) +
+        Math.abs(this.state.FINISH_NODE_COL - col),
+      isVisisted: false,
+      isWallNode: false,
+      previousNode: null,
+    };
+  };
+
   clearWalls() {
     if (!this.state.isRunning && !this.state.modalIsOpen) {
-      const newGrid = this.state.grid.slice()
+      const newGrid = this.state.grid.slice();
       for (const row of newGrid) {
         for (const node of row) {
           let nodeClassName = document.getElementById(
-            `node-${node.row}-${node.col}`,
+            `node-${node.row}-${node.col}`
           ).className;
-          if (
-            nodeClassName === 'node node-wall'
-          ) {
+          if (nodeClassName === "node node-wall") {
             document.getElementById(`node-${node.row}-${node.col}`).className =
-              'node';
-            node.isWall = false
+              "node";
+            node.isWall = false;
           }
         }
       }
@@ -70,54 +89,45 @@ class PathfindingVisualizer extends Component {
 
   clearPaths() {
     if (!this.state.isRunning && !this.state.modalIsOpen) {
-      const newGrid = this.state.grid.slice()
+      const newGrid = this.state.grid.slice();
       for (const row of newGrid) {
         for (const node of row) {
-          let nodeClassName = document.getElementById(`node-${node.row}-${node.col}`).className;
+          let nodeClassName = document.getElementById(
+            `node-${node.row}-${node.col}`
+          ).className;
           if (
-            nodeClassName !== 'node node-start' &&
-            nodeClassName !== 'node node-finish' &&
-            nodeClassName !== 'node node-wall'
+            nodeClassName !== "node node-start" &&
+            nodeClassName !== "node node-finish" &&
+            nodeClassName !== "node node-wall"
           ) {
-            document.getElementById(`node-${node.row}-${node.col}`).className = 'node';
-            node.isVisited = false
-            node.distance = Infinity
-            node.distanceToFinishNode = Math.abs(this.state.FINISH_NODE_ROW - node.row) + Math.abs(this.state.FINISH_NODE_COL - node.col)
+            document.getElementById(`node-${node.row}-${node.col}`).className =
+              "node";
+            node.isVisited = false;
+            node.distance = Infinity;
+            node.distanceToFinishNode =
+              Math.abs(this.state.FINISH_NODE_ROW - node.row) +
+              Math.abs(this.state.FINISH_NODE_COL - node.col);
           }
-          if (nodeClassName === 'node node-finish') {
-            node.isVisited = false
-            node.distance = Infinity
-            node.distanceToFinishNode = 0
+          if (nodeClassName === "node node-finish") {
+            node.isVisited = false;
+            node.distance = Infinity;
+            node.distanceToFinishNode = 0;
           }
-          if (nodeClassName === 'node node-start') {
-            node.isVisited = false
-            node.distance = Infinity
-            node.distanceToFinishNode = Math.abs(this.state.FINISH_NODE_ROW - node.row) + Math.abs(this.state.FINISH_NODE_COL - node.col)
-            node.isStart = true
-            node.isWall = false
-            node.previousNode = null
-            node.isNode = true
+          if (nodeClassName === "node node-start") {
+            node.isVisited = false;
+            node.distance = Infinity;
+            node.distanceToFinishNode =
+              Math.abs(this.state.FINISH_NODE_ROW - node.row) +
+              Math.abs(this.state.FINISH_NODE_COL - node.col);
+            node.isStart = true;
+            node.isWall = false;
+            node.previousNode = null;
+            node.isNode = true;
           }
         }
       }
     }
   }
-
-  createNode = (col, row) => {
-    return {
-      col,
-      row,
-      isStart:
-        row === this.state.START_NODE_ROW && col === this.state.START_NODE_COL,
-      isFinish:
-        row === this.state.FINISH_NODE_ROW && col === this.state.FINISH_NODE_COL,
-      distance: Infinity,
-      distanceToFinishNode: Math.abs(this.state.FINISH_NODE_ROW - row) + Math.abs(this.state.FINISH_NODE_COL - col),
-      isVisisted: false,
-      isWallNode: false,
-      previousNode: null,
-    };
-  };
 
   handleMouseDown(row, col) {
     this.clearPaths();
@@ -162,24 +172,34 @@ class PathfindingVisualizer extends Component {
           .className;
         if (this.state.isStartNode) {
           if (nodeClassName !== "node node-wall") {
-            const prevStartNode = this.state.grid[this.state.currRow][this.state.currCol];
+            const prevStartNode = this.state.grid[this.state.currRow][
+              this.state.currCol
+            ];
             prevStartNode.isStart = false;
-            document.getElementById(`node-${this.state.currRow}-${this.state.currCol}`).className = "node";
+            document.getElementById(
+              `node-${this.state.currRow}-${this.state.currCol}`
+            ).className = "node";
             this.setState({ currRow: row, currCol: col });
             const currStartNode = this.state.grid[row][col];
             currStartNode.isStart = true;
-            document.getElementById(`node-${row}-${col}`).className = "node node-start";
+            document.getElementById(`node-${row}-${col}`).className =
+              "node node-start";
           }
           this.setState({ START_NODE_ROW: row, START_NODE_COL: col });
         } else if (this.state.isFinishNode) {
           if (nodeClassName !== "node node-wall") {
-            const prevFinishNode = this.state.grid[this.state.currRow][this.state.currCol];
+            const prevFinishNode = this.state.grid[this.state.currRow][
+              this.state.currCol
+            ];
             prevFinishNode.isFinish = false;
-            document.getElementById(`node-${this.state.currRow}-${this.state.currCol}`).className = "node";
+            document.getElementById(
+              `node-${this.state.currRow}-${this.state.currCol}`
+            ).className = "node";
             this.setState({ currRow: row, currCol: col });
             const currFinishNode = this.state.grid[row][col];
             currFinishNode.isFinish = true;
-            document.getElementById(`node-${row}-${col}`).className = "node node-finish";
+            document.getElementById(`node-${row}-${col}`).className =
+              "node node-finish";
           }
           this.setState({ FINISH_NODE_ROW: row, FINISH_NODE_COL: col });
         } else if (this.state.isWallNode) {
@@ -195,7 +215,11 @@ class PathfindingVisualizer extends Component {
       this.setState({ mouseIsPressed: false });
       if (this.state.isStartNode) {
         const isStartNode = !this.state.isStartNode;
-        this.setState({ isStartNode, START_NODE_ROW: row, START_NODE_COL: col });
+        this.setState({
+          isStartNode,
+          START_NODE_ROW: row,
+          START_NODE_COL: col,
+        });
       } else if (this.state.isFinishNode) {
         const isFinishNode = !this.state.isFinishNode;
         this.setState({
@@ -232,14 +256,14 @@ class PathfindingVisualizer extends Component {
       setTimeout(() => {
         const node = visitedNodesInOrder[i];
         const nodeClassName = document.getElementById(
-          `node-${node.row}-${node.col}`,
+          `node-${node.row}-${node.col}`
         ).className;
         if (
-          nodeClassName !== 'node node-start' &&
-          nodeClassName !== 'node node-finish'
+          nodeClassName !== "node node-start" &&
+          nodeClassName !== "node node-finish"
         ) {
           document.getElementById(`node-${node.row}-${node.col}`).className =
-            'node node-visited';
+            "node node-visited";
         }
       }, 10 * i);
     }
@@ -247,7 +271,7 @@ class PathfindingVisualizer extends Component {
 
   animateShortestPath(nodesInShortestPathOrder) {
     for (let i = 0; i < nodesInShortestPathOrder.length; i++) {
-      if (nodesInShortestPathOrder[i] === 'last') {
+      if (nodesInShortestPathOrder[i] === "last") {
         setTimeout(() => {
           this.isRunning();
         }, i * 50);
@@ -255,11 +279,11 @@ class PathfindingVisualizer extends Component {
         setTimeout(() => {
           const node = nodesInShortestPathOrder[i];
           const nodeClassName = document.getElementById(
-            `node-${node.row}-${node.col}`,
+            `node-${node.row}-${node.col}`
           ).className;
           if (
-            nodeClassName !== 'node node-start' &&
-            nodeClassName !== 'node node-finish'
+            nodeClassName !== "node node-start" &&
+            nodeClassName !== "node node-finish"
           ) {
             document.getElementById(`node-${node.row}-${node.col}`).className =
               "node node-shortest-path";
@@ -271,7 +295,7 @@ class PathfindingVisualizer extends Component {
 
   visualizeAlgorithm(algorithm) {
     if (!this.state.isRunning && !this.state.modalIsOpen) {
-      this.isRunning()
+      this.isRunning();
       const { grid } = this.state;
       let visitedNodesInOrder;
       const startNode =
@@ -279,26 +303,64 @@ class PathfindingVisualizer extends Component {
       const finishNode =
         grid[this.state.FINISH_NODE_ROW][this.state.FINISH_NODE_COL];
       switch (algorithm) {
-        case 'Dijkstra':
+        case "Dijkstra":
           visitedNodesInOrder = dijkstra(grid, startNode, finishNode);
           break;
-        case 'Breadth-first Search':
+        case "Breadth-first Search":
           visitedNodesInOrder = bfs(grid, startNode, finishNode);
           break;
-        case 'Depth-first Search':
+        case "Depth-first Search":
           visitedNodesInOrder = dfs(grid, startNode, finishNode);
           break;
-        case 'A*':
+        case "A*":
           visitedNodesInOrder = astar(grid, startNode, finishNode);
           break;
         default:
           break;
       }
       const nodesInShortestPathOrder = getNodesInShortestPathOrder(finishNode);
-      nodesInShortestPathOrder.push('last');
+      nodesInShortestPathOrder.push("last");
       this.animateAlgorithm(visitedNodesInOrder, nodesInShortestPathOrder);
     }
   }
+
+  /*----------------------------------------------------------maze generations functions---------------------------------------------------------*/
+  generateRandomMaze = () => {
+    if (this.state.isRunning) return;
+    this.setState({ isRunning: true });
+    const {
+      grid,
+      START_NODE_ROW,
+      START_NODE_COL,
+      FINISH_NODE_ROW,
+      FINISH_NODE_COL,
+    } = this.state;
+    const startNode = grid[START_NODE_ROW][START_NODE_COL];
+    console.log(startNode);
+    const finishNode = grid[FINISH_NODE_ROW][FINISH_NODE_COL];
+    const walls = randomMaze(grid, startNode, finishNode);
+    this.animateWalls(walls, grid);
+  };
+
+  animateWalls = (walls, grid) => {
+    for (let i = 0; i <= walls.length; i++) {
+      if (i === walls.length) {
+        setTimeout(() => {
+          const newGrid = getNewGridWithMaze(this.state.grid, walls);
+          this.setState({ grid: newGrid, isRunning: false });
+        }, 10 * i);
+        return;
+      }
+      setTimeout(() => {
+        const wall = walls[i];
+        const node = grid[wall[0]][wall[1]];
+        document.getElementById(`node-${node.row}-${node.col}`).className =
+          "node node-animated-wall";
+      }, 10 * i);
+    }
+  };
+
+  /*------------------------------------------------------------------------------------------------------------------------------*/
 
   render() {
     const { grid, mouseIsPressed } = this.state;
@@ -308,24 +370,76 @@ class PathfindingVisualizer extends Component {
       <>
         <div>
           <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-            <button className="title" onClick={(e) => this.setState({ modalIsOpen: true })}>Pathfinding Visualizer</button>
+            <button
+              className="title"
+              onClick={(e) => this.setState({ modalIsOpen: true })}
+            >
+              Pathfinding Visualizer
+            </button>
           </nav>
           <div className="action">
-            <Dialog modalIsOpen={this.state.modalIsOpen} onClose={() => this.setState({ modalIsOpen: false })}> loren ipsum </Dialog>
-            <button className="btn btn-primary" onClick={() => { this.clearPaths(); this.visualizeAlgorithm('Dijkstra') }}>
+            <Dialog
+              modalIsOpen={this.state.modalIsOpen}
+              onClose={() => this.setState({ modalIsOpen: false })}
+            ></Dialog>
+            <button
+              className="btn btn-primary"
+              onClick={() => {
+                this.clearPaths();
+                this.visualizeAlgorithm("Dijkstra");
+              }}
+            >
               Dijkstra's Algorithm
-        </button>
-            <button className="btn btn-primary" onClick={() => { this.clearPaths(); this.visualizeAlgorithm('Breadth-first Search') }}>
-              Breadth-first Search
-        </button>
-            <button className="btn btn-primary" onClick={() => { this.clearPaths(); this.visualizeAlgorithm('Depth-first Search') }}>
+            </button>
+            <button
+              className="btn btn-primary"
+              onClick={() => {
+                this.clearPaths();
+                this.visualizeAlgorithm("Depth-first Search");
+              }}
+            >
               Depth-first Search
-        </button>
-            <button className="btn btn-primary" onClick={() => { this.clearPaths(); this.visualizeAlgorithm('A*') }}>
+            </button>
+            <button
+              className="btn btn-primary"
+              onClick={() => {
+                this.clearPaths();
+                this.visualizeAlgorithm("A*");
+              }}
+            >
               A* Search
-        </button>
-            <button className="btn btn-danger" onClick={() => this.clearWalls()}>Clear Walls</button>
-            <button className="btn btn-danger" onClick={() => this.clearPaths()}>Clear Paths</button>
+            </button>
+            <button
+              className="btn btn-primary"
+              onClick={() => {
+                this.clearPaths();
+                this.visualizeAlgorithm("Breadth-first Search");
+              }}
+            >
+              Breadth-first Search
+            </button>
+            <button
+              className="btn btn-secondary"
+              onClick={() => {
+                this.clearPaths();
+                this.clearWalls();
+                this.generateRandomMaze();
+              }}
+            >
+              Generate Random Maze
+            </button>
+            <button
+              className="btn btn-danger"
+              onClick={() => this.clearWalls()}
+            >
+              Clear Walls
+            </button>
+            <button
+              className="btn btn-danger"
+              onClick={() => this.clearPaths()}
+            >
+              Clear Paths
+            </button>
           </div>
           <div
             className="grid-container"
@@ -369,12 +483,21 @@ class PathfindingVisualizer extends Component {
               })}
             </div>
           </div>
+          <div className="info">
+            <div className="block" id="yellow" />
+            <span className="explanation">: Path Node</span>
+            <div className="block" id="blue" />
+            <span className="explanation">: Visited Node</span>
+            <div className="block" id="start-node" />
+            <span className="explanation">: Start Node</span>
+            <div className="block" id="finish-node" />
+            <span className="explanation">: Finish Node</span>
+          </div>
         </div>
       </>
     );
   }
 }
-
 
 const getNewGridWithWallToggled = (grid, row, col) => {
   const newGrid = grid.slice();
@@ -399,5 +522,17 @@ function getNodesInShortestPathOrder(finishNode) {
   return nodesInShortestPathOrder;
 }
 
+const getNewGridWithMaze = (grid, walls) => {
+  let newGrid = grid.slice();
+  for (let wall of walls) {
+    let node = grid[wall[0]][wall[1]];
+    let newNode = {
+      ...node,
+      isWall: true,
+    };
+    newGrid[wall[0]][wall[1]] = newNode;
+  }
+  return newGrid;
+};
 
 export default PathfindingVisualizer;

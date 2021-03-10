@@ -3,6 +3,8 @@ import "./Dialog.css";
 import walls from "../assets/walls.gif"
 import algorithms from "../assets/algorithms.png"
 import nodes from "../assets/nodes.gif"
+import rocket from "../assets/rocket.png"
+import desination from "../assets/AtoB.png"
 
 let dialogStyles = {
     width: '500px',
@@ -37,16 +39,7 @@ let center = {
     display: 'block',
     marginLeft: 'auto',
     marginRight: 'auto',
-    width: '300px'
 }
-
-let center2 = {
-    display: 'block',
-    marginLeft: 'auto',
-    marginRight: 'auto',
-    width: '325px'
-}
-
 
 class Dialog extends Component {
     state = {
@@ -61,9 +54,10 @@ class Dialog extends Component {
     render() {
         // console.log(this.state.number)
         let dialog = (
-            <div style={dialogStyles}>
+            <div className="dialog" style={dialogStyles}>
                 <button style={dialogCloseButtonStyles} onClick={this.props.onClose}>&times;</button>
                 <h1>Welcome to Pathfinding Visualizer!</h1>
+                <img style={center} id="size-3" src={rocket} alt="rocket" />
                 <br />
                 <p className="subtitle">This tutorial will guide you through all of the features of this application.</p>
                 <br />
@@ -73,38 +67,37 @@ class Dialog extends Component {
         )
 
         let dialog2 = (
-            <div style={dialogStyles}>
+            <div className="dialog" style={dialogStyles}>
                 <button style={dialogCloseButtonStyles} onClick={() => this.closeModal()}>&times;</button>
                 <h1>Do you know what is a pathfinding algorithm?</h1>
+                <img style={center} id="size-4" src={desination} alt="destination" />
                 <br />
                 <p className="subtitle">A pathfinding algorithm is used to find the shortest path between two points (start point and end point). This application visualize various pathfinding algorithms in action.</p>
-                <br />
-                <p>All of the algorithms on this application are adapted for a 2D grid, where 90 degree turns have a "cost" of 1 and movements from a node to another have a "cost" of 1.</p>
                 <button className="btn btn-primary" onClick={() => this.setState({ number: 3 })}>Next</button>
             </div >
         )
 
         let dialog3 = (
-            <div style={dialogStyles}>
+            <div className="dialog" style={dialogStyles}>
                 <button style={dialogCloseButtonStyles} onClick={() => this.closeModal()}>&times;</button>
                 <h1>Adding walls</h1>
                 <br />
                 <p className="subtitle">Click on the grid to add a wall or click and drag to add walls</p>
                 <br />
                 <p>Walls are impenetrable, meaning that a path cannot cross through them.</p>
-                <img style={center} src={walls} alt="walls" />
+                <img style={center} id="size-1" src={walls} alt="walls" />
                 <button className="btn btn-primary" onClick={() => this.setState({ number: 4 })}>Next</button>
             </div >
         )
 
         let dialog4 = (
-            <div style={dialogStyles}>
+            <div className="dialog" style={dialogStyles}>
                 <button style={dialogCloseButtonStyles} onClick={() => this.closeModal()}>&times;</button>
                 <h1>Dragging nodes</h1>
                 <br />
                 <p className="subtitle">Click and drag the start and end node to move them</p>
                 <br />
-                <img style={center} src={nodes} alt="nodes" />
+                <img style={center} id="size-1" src={nodes} alt="nodes" />
                 {/* <p>Walls are impenetrable, meaning that a path cannot cross through them.</p>
                 <img style={center} src={walls} alt="walls" /> */}
                 <button className="btn btn-primary" onClick={() => this.setState({ number: 5 })}>Next</button>
@@ -112,21 +105,21 @@ class Dialog extends Component {
         )
 
         let dialog5 = (
-            <div style={dialogStyles}>
+            <div className="dialog" style={dialogStyles}>
                 <button style={dialogCloseButtonStyles} onClick={() => this.closeModal()}>&times;</button>
                 <h1>Visualizing and more</h1>
                 <br />
                 <p className="subtitle">Click the buttons to visualize algorithms and do other thing</p>
                 <br />
                 <p>You can clear the current path and clear walls from the navbar. If you want to access this tutorial again, click on "Pathfinding Visualizer" in the top left corner of your screen.</p>
-                <img style={center2} src={algorithms} alt="algorithms" />
+                <img style={center} id="size-2" src={algorithms} alt="algorithms" />
                 <br />
                 <button className="btn btn-primary" onClick={() => this.setState({ number: 6 })}>Next</button>
             </div >
         )
 
         let dialog6 = (
-            <div style={dialogStyles}>
+            <div className="dialog" style={dialogStyles}>
                 <button style={dialogCloseButtonStyles} onClick={() => this.closeModal()}>&times;</button>
                 <h1>Get to know the algorithms</h1>
                 <br />

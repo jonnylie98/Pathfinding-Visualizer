@@ -19,7 +19,7 @@ Not all algorithms are created equal.
 - Dijkstra's Algorithm: the father of pathfinding algorithms; guarantees the shortest path
 - Breath-first Search: a great algorithm; guarantees the shortest path
 - Depth-first Search: a very bad algorithm for pathfinding; does not guarantee the shortest path
-- A\* Search: arguably the best pathfinding algorithm; uses heuristics to guarantee the shortest path much faster than Dijkstra's Algorithm
+- A\* Search: arguably the best pathfinding algorithm; uses heuristics to guarantee the shortest path; much faster than Dijkstra's Algorithm
 
 ## Built With
 
